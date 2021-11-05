@@ -15,7 +15,7 @@ class SclassController extends Controller
     public function index()
     {
         $class = Sclass::all();
-        return response()->jason($class);
+        return response()->json($class);
     }
 
     /**
