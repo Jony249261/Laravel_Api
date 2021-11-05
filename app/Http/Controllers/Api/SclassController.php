@@ -36,7 +36,16 @@ class SclassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData=$request->validate([
+            'class_name' => 'required|unique:sclasses|max:25',
+        ]);
+
+
+        $class = new Sclass();
+        $class->class_name = $request->class_name;
+        $class->save();
+        return response('Inserted Successfully');
+
     }
 
     /**
