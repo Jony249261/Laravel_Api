@@ -56,7 +56,8 @@ class SclassController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Sclass::where('id',$id)->first();
+        return response()->json($data);
     }
 
     /**
@@ -79,7 +80,15 @@ class SclassController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validateData=$request->validate([
+            'class_name' => 'required|unique:sclasses|max:25',
+        ]);
+
+
+        $class = Sclass::find($id);
+        $class->class_name = $request->class_name;
+        $class->save();
+        return response('Updated Successfully');
     }
 
     /**
@@ -90,6 +99,7 @@ class SclassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $class = Sclass::where('id',$id)->delete();
+        return response('Data Deleted Successfully');
     }
 }
